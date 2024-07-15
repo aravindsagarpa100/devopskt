@@ -1,0 +1,33 @@
+name: Flask app deployment
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  flaskapp_deployment:
+    runs-on: ubuntu-latest
+    name: build flaskapp and deploy to minikube
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: medyagh/local-dev-example-with-minikube
+    - name: Start minikube
+      uses: medyagh/setup-minikube@latest
+    - name: Try the cluster!
+      run: kubectl get pods -A
+    - name: Build image
+      run: |
+        minikube image build -t batmanapi:1.0 .        
+    - name: Deploy to minikube
+      run:
+        kubectl apply -f kube/deployment.yml
+        kubectl wait --for=condition=ready pod -l app=batmanapi
+    - name: Test service URLs
+      run: |
+        minikube service list
+        minikube service batmansvc --url
+        echo "------------------opening the service------------------"
+        curl $(minikube service batmansvc --url)        

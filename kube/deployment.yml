@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batmanapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: batmanapi
+  template:
+    metadata:
+      labels:
+        app: batmanapi
+    spec:
+      containers:
+      - name: batmanapi
+        image: batmanapi:1.0
+        ports:
+        - containerPort: 5000
+        # env:
+        # - name: MONGO_HOST
+        #   value: mongodb-service
+        # - name: MONGO_PORT
+        #   value: "27017"
+        # - name: FLASK_ENV
+        #   value: "production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: batmansvc
+spec:
+  type: NodePort
+  selector:
+    app: batmanapi
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
