@@ -22,7 +22,7 @@ jobs:
       run: |
         minikube image build -t batmanapi:1.0 .        
     - name: Deploy to minikube
-      run:
+      run: |
         kubectl apply -f kube/deployment.yml
         kubectl wait --for=condition=ready pod -l app=batmanapi
     - name: Test service URLs
