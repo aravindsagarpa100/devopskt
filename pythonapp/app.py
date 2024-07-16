@@ -20,7 +20,7 @@ def login():
         value = request.form['nm']
         if value == 'cat':
             return redirect(url_for('cat'))
-        elif value == 'dog':
+        if value == 'dog':
             return redirect(url_for('dog'))
         else:
             return redirect(url_for('wrong'))
