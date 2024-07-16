@@ -12,7 +12,7 @@ def failure():
 
 @app.route('/wrong')
 def failure():
-    return render_template('dog.html')
+    return render_template('wrong.html')
 
 @app.route('/login', methods = ['POST'])
 def login():
