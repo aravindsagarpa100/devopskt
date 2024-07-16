@@ -1,18 +1,18 @@
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
 @app.route('/cat')
-def success():
-    return 'You selected CAT'
+def cat():
+    return render_template('cat.html')
 
 @app.route('/dog')
-def failure():
-    return 'You selected DOG'
+def dog():
+    return render_template('dog.html')
 
 @app.route('/wrong')
-def failure():
-    return 'Select either CAT or DOG'
+def wrong():
+    return render_template('wrong.html')
 
 @app.route('/login', methods = ['POST'])
 def login():
@@ -20,7 +20,7 @@ def login():
         value = request.form['nm']
         if value == 'cat':
             return redirect(url_for('cat'))
-        if value == 'dog':
+        elif value == 'dog':
             return redirect(url_for('dog'))
         else:
             return redirect(url_for('wrong'))
