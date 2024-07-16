@@ -4,15 +4,15 @@ app = Flask(__name__)
 
 @app.route('/cat')
 def cat():
-    return render_template('cat.html')
+    return "You Chose CAT"
 
 @app.route('/dog')
 def dog():
-    return render_template('dog.html')
+    return "You Chose DOG"
 
 @app.route('/wrong')
 def wrong():
-    return render_template('wrong.html')
+    return "Chose CAT or DOG"
 
 @app.route('/login', methods = ['POST'])
 def login():
