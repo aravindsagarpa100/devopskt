@@ -1,37 +1,36 @@
-name: Flask app deployment
+# name: Flask app deployment
+# on:
+#   push:
+#     branches:
+#     - main
+#   pull_request:
 
-on:
-  push:
-    branches:
-    - main
-  pull_request:
+# jobs:
+#   flaskapp_deployment:
+#     runs-on: ubuntu-latest
+#     name: build flaskapp and deploy to minikube
+#     steps:
+#     - uses: actions/checkout@v4
+#     - name: Start minikube
+#       uses: medyagh/setup-minikube@latest
+#     - name: Try the cluster!
+#       run: kubectl get pods -A
+#     - name: Build image
+#       run: |
+#         minikube image build -t batmanapi:1.0 .        
+#     - name: Deploy to minikube
+#       run: |
+#         kubectl apply -f kube/deployment.yml
+#         kubectl wait --for=condition=ready pod -l app=batmanapi
+#         kubectl expose deployment batmanapi --type=LoadBalancer --port=5000 --name=batmansvc
 
-jobs:
-  flaskapp_deployment:
-    runs-on: ubuntu-latest
-    name: build flaskapp and deploy to minikube
-    steps:
-    - uses: actions/checkout@v4
-    - name: Start minikube
-      uses: medyagh/setup-minikube@latest
-    - name: Try the cluster!
-      run: kubectl get pods -A
-    - name: Build image
-      run: |
-        minikube image build -t batmanapi:1.0 .        
-    - name: Deploy to minikube
-      run: |
-        kubectl apply -f kube/deployment.yml
-        kubectl wait --for=condition=ready pod -l app=batmanapi
-        kubectl expose deployment batmanapi --type=LoadBalancer --port=5000 --name=batmansvc
-
-    - name: Test service URLs
-      run: |
-        minikube service list
-        minikube service batmansvc --url
-        echo "------------------opening the service------------------"
-        curl $(minikube service batmansvc --url)   
-    - name: Sleep for 240 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '240s'     
+#     - name: Test service URLs
+#       run: |
+#         minikube service list
+#         minikube service batmansvc --url
+#         echo "------------------opening the service------------------"
+#         curl $(minikube service batmansvc --url)   
+#     - name: Sleep for 240 seconds
+#       uses: jakejarvis/wait-action@master
+#       with:
+#         time: '240s'     
