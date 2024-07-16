@@ -23,7 +23,7 @@ jobs:
       run: |
         kubectl apply -f kube/deployment.yml
         kubectl wait --for=condition=ready pod -l app=batmanapi
-        kubectl expose deployment batmanapi --type=LoadBalancer --port=5000
+        kubectl expose deployment batmanapi --type=LoadBalancer --port=5000 --name=batmansvc
 
     - name: Test service URLs
       run: |
@@ -31,7 +31,7 @@ jobs:
         minikube service batmansvc --url
         echo "------------------opening the service------------------"
         curl $(minikube service batmansvc --url)   
-    - name: Sleep for 30 seconds
+    - name: Sleep for 240 seconds
       uses: jakejarvis/wait-action@master
       with:
         time: '240s'     
