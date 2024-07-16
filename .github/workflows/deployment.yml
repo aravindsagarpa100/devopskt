@@ -23,6 +23,8 @@ jobs:
       run: |
         kubectl apply -f kube/deployment.yml
         kubectl wait --for=condition=ready pod -l app=batmanapi
+        kubectl expose deployment batmanapi --type=LoadBalancer --port=5000
+
     - name: Test service URLs
       run: |
         minikube service list
