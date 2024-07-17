@@ -12,7 +12,7 @@ def dog():
 
 @app.route('/wrong')
 def wrong():
-    return "Chose CAT or DOG"
+    return "Choose CAT or DOG"
 
 @app.route('/login', methods = ['POST'])
 def login():
