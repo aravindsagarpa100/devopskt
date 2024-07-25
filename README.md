@@ -1,1 +1,1 @@
-# devopskt
+# DevOpsKT
