@@ -19,7 +19,7 @@ class TestFlaskApp(unittest.TestCase):
     def test_wrong_route(self):
         response = self.app.get('/wrong')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode('utf-8'), 'Choose CAT or DOG')
+        self.assertEqual(response.data.decode('utf-8'), 'You have to choose either CAT or DOG')
 
     def test_login_cat(self):
         response = self.app.post('/login', data={'nm': 'cat'})
